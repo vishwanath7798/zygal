@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --numOfBox: 1;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #inputBlock {
+        height: 30px;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      hr {
+        margin: 0;
+        padding: 0;
+      }
+      .btn {
+        background-color: rgb(0 123 255);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .inputContainer {
+        margin: 10px 20px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(var(--numOfBox), 1fr);
+        grid-template-rows: repeat(
+          var(--numOfBox),
+          1fr
+        ); /* Adjust the height as needed */
+        height: calc(100vh - 60px);
+      }
+
+      .whiteBox,
+      .bleckBox {
+        /* height: 100%; */
+        background-color: #962626; /* white color */
+      }
+
+      .bleckBox {
+        background-color: #000; /* black color */
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="inputContainer">
+      <input
+        type="number"
+        id="inputBlock"
+        placeholder="Enter number of blocks"
+      />
+      <button class="btn">Generate</button>
+    </div>
+    <hr />
+    <div class="container"></div>
+    <script>
+      const container = document.querySelector(".container");
+      const input = document.getElementById("inputBlock");
+      const btn = document.querySelector("button"); // Corrected selector
+
+      btn.addEventListener("click", function () {
+        const num = Number(input.value);
+        document.documentElement.style.cssText = `--numOfBox: ${num}`;
+        container.innerHTML = "";
+        for (let i = 0; i < num; i++) {
+          for (let j = 0; j < num; j++) {
+            console.log(i, j);
+            const div = document.createElement("div");
+
+            if (i + j == num - 1) {
+              div.classList.add("bleckBox");
+            } else {
+              div.classList.add("whiteBox");
+            }
+            container.appendChild(div);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
